@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nafas</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../style.css">
+<style>
+  main { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 0; padding-bottom: 0; }
+  .handle { font-size: 40px; line-height: 1.1; letter-spacing: -.03em; font-weight: 700; margin: 28px 0 8px; word-break: break-all; }
+  .hint { color: var(--muted); margin: 0 0 32px; }
+  .open { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 28px; border-radius: 26px;
+          background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; align-self: flex-start; }
+  .open:active { transform: scale(.98); }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark"><svg viewBox="0 0 150 100" aria-hidden="true"><circle cx="56" cy="50" r="38" fill="none" stroke="#B3262D" stroke-width="5"/><circle cx="94" cy="50" r="38" fill="none" stroke="#B3262D" stroke-width="5"/></svg>Nafas</div>
+  <p class="handle" id="handle">Post</p>
+  <p class="hint" id="hint">Post Nafas ilovasida ochiladi.</p>
+  <a class="open" id="open" href="nafas://">Nafas’da ochish</a>
+</main>
+<script>
+  // nafas.../p/?<post id> — only a UUID ever reaches the app link.
+  var raw = (location.search.slice(1) || location.hash.slice(1)).split('&')[0].toLowerCase();
+  var id = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(raw) ? raw : '';
+  if (id) {
+    var link = 'nafas://p/' + id;
+    document.getElementById('open').href = link;
+    location.replace(link);
+  } else {
+    document.getElementById('hint').textContent = 'Havola to‘liq emas.';
+  }
+</script>
+</body>
+</html>
